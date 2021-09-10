@@ -25,7 +25,7 @@ c
         read *,n
         call prinf('n = *',n,1)
 c
-        krank = 5
+        krank = 500
         call prinf('krank = *',krank,1)
 c
 c
@@ -36,12 +36,15 @@ c
 c
 c       ID a via a randomized algorithm.
 c
-        eps = .1d-12
+        eps = .1d-15
         lproj = len
 c
+        krank = 0
+        call prinf('krank pass in = *',krank,1)
         call iddp_rid(lproj,eps,m,n,matvect,a,p2,p3,p4,
      1                krank,list,proj,ier)
 c
+        call prinf('krank pass out = *',krank,1)
         call prinf('ier = *',ier,1)
         call prinf('list = *',list,krank)
 c
@@ -98,7 +101,7 @@ c
             do l = 1,krank
               sum = sum+cos(pi*(j-r1/2)*(l-r1/2)/m)*sqrt(r1*2/m)
      1                 *cos(pi*(k-r1/2)*(l-r1/2)/n)*sqrt(r1*2/n)
-     2                 *exp(log(1d-10)*(l-1)/(krank-1))
+     2                 *1.1*(l+krank)/krank
             enddo ! l
 c
             a(j,k) = sum
